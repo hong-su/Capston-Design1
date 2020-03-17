@@ -30,10 +30,12 @@ for i in range(10):
         print('Success! Passed Value is ' + str(value))
     else:
         print('An error has occurred.')
-        
+
+    if i == 9:
+        break;
+    
     wait_time = randint(10, 20)
     print('Waiting ' + str(wait_time) + ' second..\n')
     time.sleep(wait_time)
 
-
-    
+print('Finish!')
