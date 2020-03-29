@@ -4,13 +4,18 @@ const port = 8000;
 const querystring = require('querystring');
 const url = require('url');
 const bodyparser = require('body-parser');
+const moment = require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 
 app.use(express.json());
 
 app.get("/*", function (req, res) {
-	var cur_time = new Date().toJSON().substring(0,19).replace('T',' ');
+	var cur_time = moment().format('YYYY-MM-DD HH:mm:ss');
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	
+	if (ip.substr(0, 7) == "::ffff:") {
+		ip = ip.substr(7)
+	}
+
 	var data = {};
 	var key = new Array();
 	
@@ -43,13 +48,14 @@ app.get("/*", function (req, res) {
 });
 
 app.post('/', function(req, res){ 
-	var data = {};
-	var key = new Array();
-	var cur_time = new Date().toJSON().substring(0,19).replace('T',' ');
+	var cur_time = moment().format('YYYY-MM-DD HH:mm:ss');
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	if (ip.substr(0, 7) == "::ffff:") {
 		ip = ip.substr(7)
 	}
+
+	var data = {};
+	var key = new Array();
 	
 	key[0] = "Email";
 	key[1] = "Stuno";
