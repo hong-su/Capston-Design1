@@ -1,2 +1,2 @@
-# Capstone-Design1
+# Capston-Design1
 CSE4186-02
