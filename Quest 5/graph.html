@@ -1,0 +1,56 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>20151556 BHS</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      
+      <%HEADER%>
+      <%DATA%>
+
+      var options = {
+        title: '서울특별시 마포구 신수동 기온 변화',
+        width: 900,
+        height: 500,
+        legend: {position: 'none'},
+        enableInteractivity: false,
+        chartArea: {
+          width: '85%'
+        },
+        hAxis: {
+          viewWindow: {
+          },
+          gridlines: {
+            count: -1,
+            units: {
+              days: {format: ['MMM dd']},
+              hours: {format: ['HH:mm', 'ha']},
+            }
+          },
+          minorGridlines: {
+            units: {
+              hours: {format: ['hh:mm:ss a', 'ha']},
+              minutes: {format: ['HH:mm a Z', ':mm']}
+            }
+          }
+        }
+      };
+
+      var chart = new google.visualization.LineChart(
+        document.getElementById('chart_div'));
+        chart.draw(data, options);
+        var button = document.getElementById('change');
+        var isChanged = false;
+    }
+
+  </script>
+</head>
+<body>
+  <div id="chart_div"></div>
+</body>
+</html>
